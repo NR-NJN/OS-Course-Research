@@ -83,21 +83,26 @@ int main() {
 
      
      
-    const char *entry_prog_title = "uprobe//usr/lib/x86_64-linux-gnu/wine/x86_64-windows/ntdll.dll:NtCreateKey";
-    const char *exit_prog_title = "uretprobe//usr/lib/x86_64-linux-gnu/wine/x86_64-windows/ntdll.dll:NtCreateKey";
+         
+     
+    const char *entry_prog_name = "trace_entry";  
+    const char *exit_prog_name = "trace_exit";    
     const char *binary_path = "/usr/lib/x86_64-linux-gnu/wine/x86_64-windows/ntdll.dll";  
 
-    prog_entry = bpf_object__find_program_by_title(obj, entry_prog_title);
+     
+    prog_entry = bpf_object__find_program_by_name(obj, entry_prog_name);
     if (!prog_entry) {
-        fprintf(stderr, "Failed to find BPF program '%s'\n", entry_prog_title);
+        fprintf(stderr, "Failed to find BPF program by name '%s'\n", entry_prog_name);
         err = -ENOENT; goto cleanup;
     }
 
-    prog_exit = bpf_object__find_program_by_title(obj, exit_prog_title);
+     
+    prog_exit = bpf_object__find_program_by_name(obj, exit_prog_name);
     if (!prog_exit) {
-        fprintf(stderr, "Failed to find BPF program '%s'\n", exit_prog_title);
+        fprintf(stderr, "Failed to find BPF program by name '%s'\n", exit_prog_name);
         err = -ENOENT; goto cleanup;
     }
+
 
      
      
