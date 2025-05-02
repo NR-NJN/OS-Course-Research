@@ -27,7 +27,7 @@ and
 gcc -g -O2 -Wall wine_tracer.c -o wine_tracer -lbpf -lelf
 
 ```
-Once you get both of these working run the wine_tracer.c file and keep it running. In a separate terminal open any Windows application through WINE and then start making whatever modifications/operations on that app. 
+Once you get both of these working run the [wine_tracer.c](src/wine_tracer.c) file and keep it running. In a separate terminal open any Windows application through WINE and then start making whatever modifications/operations on that app. 
 You should see the exact process IDs and failure points of each of the syscalls, which is more information than what WINE's commandline interface provides.
 
 ## Conclusion
