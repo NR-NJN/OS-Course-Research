@@ -1,4 +1,4 @@
-#include <linux/bpf.h>
+#include "vmlinux.h"
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_tracing.h>
 
@@ -12,9 +12,12 @@ struct event {
 
 struct {
     __uint(type, BPF_MAP_TYPE_PERF_EVENT_ARRAY);
+    __type(key, int);
+    __type(value, int);
 } events SEC(".maps");
 
-SEC("uprobe/wine/ntdll.dll.so:NtCreateKey")
+
+SEC("uprobe//usr/lib/x86_64-linux-gnu/wine/x86_64-windows/ntdll.dll:NtCreateKey")
 int trace_entry(struct pt_regs *ctx) {
     struct event e = {};
     e.pid = bpf_get_current_pid_tgid() >> 32;
@@ -23,7 +26,8 @@ int trace_entry(struct pt_regs *ctx) {
     return 0;
 }
 
-SEC("uretprobe/wine/ntdll.dll.so:NtCreateKey")
+
+SEC("uretprobe//usr/lib/x86_64-linux-gnu/wine/x86_64-windows/ntdll.dll:NtCreateKey")
 int trace_exit(struct pt_regs *ctx) {
     struct event e = {};
     e.pid = bpf_get_current_pid_tgid() >> 32;
@@ -32,3 +36,4 @@ int trace_exit(struct pt_regs *ctx) {
     bpf_perf_event_output(ctx, &events, BPF_F_CURRENT_CPU, &e, sizeof(e));
     return 0;
 }
+
