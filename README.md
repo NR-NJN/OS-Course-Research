@@ -20,7 +20,7 @@ sudo apt-get install wine winetricks
 ## Procedure
 Both files need to be compiled with specific flags and headers too
 ```
-clang -g -O2 -target bpf -D__TARGET_ARCH_x86 -c wine_tracer.bpf.c -o wine_tracer.bpf.o
+clang -g -O2 -target bpf -D<cpu architecture> -c wine_tracer.bpf.c -o wine_tracer.bpf.o
 ```
 and
 ```
