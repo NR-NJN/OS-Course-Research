@@ -1,5 +1,6 @@
 # System Calls Tracing for Windows applications running on WINE
-The link on the paper should land onto this repo which consists of the code that runs the BPF tracer on any given application through WINE.
+This is a rudimentary setup for the purposes of my research work which uses an Extended Berkeley Packet Packet Filter to snap and update each and every WINE application conversion call from
+Windows to Linux onto the running terninal shell for the user to then analyze and modify. This only contains the code for the Registry application, which albeit is relatively useless for Linux, but it helps provide a baseline to this research and to test if this code works. For the paper however, different versions of this code specialized for multiple Windows specific applications was used.
 ## Setup
 Need a virtualized Linux distro (preferably ubuntu as the test was done on a preloaded non customized build of ubuntu, although any latest distribution should not pose a serious problem).  
 
